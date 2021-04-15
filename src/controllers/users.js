@@ -1,5 +1,7 @@
 const UsersModel = require('../models/users');
 
+const { passwordCrypt } = require('../utils/password');
+
 async function get(req, res) {
   const { id } = req.params;  
   const obj = id ? { _id: id } : null;
@@ -15,11 +17,13 @@ async function get(req, res) {
 async function post(req, res) {
   const { name, age, email, password, photo } = req.body;
 
+  const passCrypt = await passwordCrypt(password);
+
   const user = new UsersModel({
     name,
     age,
     email,
-    password,
+    password: passCrypt,
     photo
   }); 
 
