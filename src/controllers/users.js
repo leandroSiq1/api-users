@@ -30,7 +30,22 @@ async function post(req, res) {
   });
 }
 
+async function put(req, res) {
+  const { id } = req.params;
+
+  const user = await UsersModel.findOneAndUpdate({ _id: id }, req.body, { new: true });
+
+  res.send({
+    message: 'sucess',
+    user
+  });
+}
+
+
+
 module.exports = {
   get,
-  post
+  post,
+  put,
+  
 }
