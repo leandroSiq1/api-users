@@ -41,11 +41,21 @@ async function put(req, res) {
   });
 }
 
+async function remove(req, res) {
+  const { id } = req.params;
 
+  const remove = await UsersModel.deleteOne({ _id: id }); 
+  
+  const message = remove.ok ? 'sucess' : 'failed';
+
+  res.send({
+    message
+  })
+}
 
 module.exports = {
   get,
   post,
   put,
-  
+  remove
 }
