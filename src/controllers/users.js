@@ -12,6 +12,25 @@ async function get(req, res) {
   });
 }
 
+async function post(req, res) {
+  const { name, age, email, password, photo } = req.body;
+
+  const user = new UsersModel({
+    name,
+    age,
+    email,
+    password,
+    photo
+  }); 
+
+  user.save();
+
+  res.send({
+    message: 'sucess',
+  });
+}
+
 module.exports = {
-  get
+  get,
+  post
 }
